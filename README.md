@@ -1,1 +1,1 @@
-# Quan_ly_chi_tieu_ca_nhan
+Đây là dự án quản lí chi tiêu cá nhân
