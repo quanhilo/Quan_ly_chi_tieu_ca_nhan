@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wallets &amp; Sources - Personal Expense Management</title>
+  <link rel="stylesheet" href="wallets.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">Personal Expense</div>
+
+      <nav class="nav-list">
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon">▦</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="transactions.html" class="nav-item">
+          <span class="nav-icon">◷</span>
+          <span>Transactions</span>
+        </a>
+        <a href="wallets.html" class="nav-item active">
+          <span class="nav-icon">💳</span>
+          <span>Wallets &amp; Sources</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📁</span>
+          <span>Categories</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">$</span>
+          <span>Budgets</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span>Reports</span>
+        </a>
+      </nav>
+
+      <a href="#" class="nav-item logout-item">
+        <span class="nav-icon">↪</span>
+        <span>Logout</span>
+      </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <a href="dashboard.html" class="back-pill">&lt; Back</a>
+
+      <!-- Header -->
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Wallets &amp; Sources</h1>
+          <p class="page-subtitle">Manage your funding sources and wallets</p>
+        </div>
+
+        <button class="btn-add-wallet" type="button">+ Add Wallet</button>
+      </header>
+
+      <!-- Total Balance Strip -->
+      <section class="balance-bar">
+        <div class="balance-label">
+          Total Balance: <strong>47.000.000 ₫</strong>
+        </div>
+        <button class="btn-transfer" type="button">Internal Transfer</button>
+      </section>
+
+      <!-- Wallets Grid -->
+      <section class="wallets-grid">
+        <!-- Wallet 1 -->
+        <article class="wallet-card">
+          <div class="wallet-head">
+            <span class="wallet-icon">💰</span>
+            <div class="wallet-meta">
+              <div class="wallet-code">Wallet 1</div>
+              <h2 class="wallet-name">Cash</h2>
+              <div class="wallet-balance">5.250.000 ₫</div>
+            </div>
+          </div>
+          <div class="wallet-actions">
+            <button class="wallet-btn" type="button">Edit</button>
+            <button class="wallet-btn" type="button">Hide / Delete</button>
+          </div>
+        </article>
+
+        <!-- Wallet 3 (MoMo) -->
+        <article class="wallet-card">
+          <div class="wallet-head">
+            <span class="wallet-icon">📱</span>
+            <div class="wallet-meta">
+              <div class="wallet-code">Wallet 3</div>
+              <h2 class="wallet-name">MoMo Wallet</h2>
+              <div class="wallet-balance">42.500.000 ₫</div>
+            </div>
+          </div>
+          <div class="wallet-actions">
+            <button class="wallet-btn" type="button">Edit</button>
+            <button class="wallet-btn" type="button">Hide / Delete</button>
+          </div>
+        </article>
+
+        <!-- Wallet 2 -->
+        <article class="wallet-card">
+          <div class="wallet-head">
+            <span class="wallet-icon">🏦</span>
+            <div class="wallet-meta">
+              <div class="wallet-code">Wallet 2</div>
+              <h2 class="wallet-name">VCB Account</h2>
+              <div class="wallet-balance">42.500.000 ₫</div>
+            </div>
+          </div>
+          <div class="wallet-actions">
+            <button class="wallet-btn" type="button">Edit</button>
+            <button class="wallet-btn" type="button">Hide / Delete</button>
+          </div>
+        </article>
+
+        <!-- Wallet 3 (Credit Card - Selected) -->
+        <article class="wallet-card selected">
+          <div class="wallet-head">
+            <span class="wallet-icon">💳</span>
+            <div class="wallet-meta">
+              <div class="wallet-code">Wallet 3</div>
+              <h2 class="wallet-name">Credit Card</h2>
+              <div class="wallet-balance">-42.500.000 ₫</div>
+            </div>
+          </div>
+          <div class="wallet-actions">
+            <button class="wallet-btn" type="button">Edit</button>
+            <button class="wallet-btn" type="button">Hide / Delete</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

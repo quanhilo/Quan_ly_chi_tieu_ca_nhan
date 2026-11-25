@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budgets - Personal Expense Management</title>
+  <link rel="stylesheet" href="budgets.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">Personal Expense</div>
+
+      <nav class="nav-list">
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon">▦</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="transactions.html" class="nav-item">
+          <span class="nav-icon">◷</span>
+          <span>Transactions</span>
+        </a>
+        <a href="wallets.html" class="nav-item">
+          <span class="nav-icon">💳</span>
+          <span>Wallets &amp; Sources</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📁</span>
+          <span>Categories</span>
+        </a>
+        <a href="budgets.html" class="nav-item active">
+          <span class="nav-icon">$</span>
+          <span>Budgets</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span>Reports</span>
+        </a>
+      </nav>
+
+      <a href="#" class="nav-item logout-item">
+        <span class="nav-icon">↪</span>
+        <span>Logout</span>
+      </a>
+    </aside>
+
+    <!-- Main Page -->
+    <div class="page-wrapper">
+      <!-- Top Header -->
+      <header class="topbar">
+        <a href="dashboard.html" class="back-title">&lt; Budgets</a>
+
+        <div class="topbar-right">
+          <button class="notif-btn" type="button" aria-label="Notifications">
+            🔔
+            <span class="notif-dot"></span>
+          </button>
+          <button class="avatar-btn" type="button" aria-label="User profile">👤</button>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <form class="budget-card" action="#" method="post">
+          <h1 class="form-title">Add / Edit Budget</h1>
+          <p class="form-subtitle">Set spending limits to keep your finances on track</p>
+
+          <!-- Limit Amount -->
+          <div class="field-group">
+            <label for="limitAmount" class="field-label">
+              Enter limit amount (₫)<span class="required">*</span>
+            </label>
+            <input
+              id="limitAmount"
+              type="text"
+              class="text-input"
+              value="3.000.000"
+              placeholder="Example: 3.000.000"
+            />
+            <p class="field-hint">Limit amount must be greater than 0</p>
+          </div>
+
+          <!-- Category Selection -->
+          <div class="field-group">
+            <label for="budgetCategory" class="field-label">
+              Select applicable category<span class="required">*</span>
+            </label>
+            <div class="select-wrapper">
+              <select id="budgetCategory" class="select-input">
+                <option value="all-expenses" selected>All expenses</option>
+                <option value="food">Food &amp; Dining</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="transport">Transport</option>
+                <option value="shopping">Shopping</option>
+              </select>
+            </div>
+            <p class="field-hint">
+              Applies to all expenses or a specific spending category (such as Food &amp; Dining, Entertainment)
+            </p>
+          </div>
+
+          <!-- Recurring Cycle -->
+          <div class="field-group">
+            <span class="field-label">
+              Recurring cycle<span class="required">*</span>
+            </span>
+            <div class="cycle-toggle" role="group" aria-label="Recurring cycle">
+              <button type="button" class="cycle-option">Weekly</button>
+              <button type="button" class="cycle-option active">Monthly</button>
+            </div>
+            <p class="field-hint">Applies to the current cycle</p>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="submit" class="btn-save">Save Budget</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
