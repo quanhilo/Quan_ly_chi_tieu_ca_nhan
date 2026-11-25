@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hồ sơ cá nhân - Quản lý chi tiêu cá nhân</title>
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body class="profile-page">
+  <header class="profile-topbar">
+    <div class="profile-topbar-inner">
+      <button type="button" id="logoutBtn" class="btn-top-gray">Đăng xuất</button>
+      <a href="index.html" class="btn-top-gray">Quay lại trang chủ</a>
+    </div>
+  </header>
+
+  <main class="profile-main">
+    <section class="profile-card">
+      <div class="profile-header">
+        <h1>Hoàn thiện hồ sơ</h1>
+        <p>Vui lòng cung cấp thêm thông tin để thiết lập tài khoản của bạn</p>
+      </div>
+
+      <div id="profileMessage" class="alert-box"></div>
+
+      <form id="profileForm" novalidate>
+        <div class="pill-form-group">
+          <label for="profileFullname">Họ và tên</label>
+          <input type="text" id="profileFullname" name="profileFullname" required />
+        </div>
+
+        <div class="pill-form-group">
+          <label for="profilePhone">Số điện thoại</label>
+          <input type="tel" id="profilePhone" name="profilePhone" required />
+        </div>
+
+        <div class="pill-form-group">
+          <label for="profileGender">Giới tính</label>
+          <input type="text" id="profileGender" name="profileGender" placeholder="Nam / Nữ / Khác" required />
+        </div>
+
+        <div class="profile-submit-wrap">
+          <button type="submit" class="btn-cyan-pill">Hoàn tất &amp; Bắt đầu</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="tram_main.js"></script>
+</body>
+</html>

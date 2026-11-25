@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xác thực tài khoản - Quản lý chi tiêu cá nhân</title>
+  <link rel="stylesheet" href="verify.css" />
+</head>
+<body class="auth-page">
+  <header class="auth-topbar">
+    <div class="auth-topbar-inner">
+      <a href="index.html" class="btn-back-home">Quay lại trang chủ</a>
+      <div class="auth-top-switch">
+        Đã xác thực tài khoản? <a href="login.html">Đăng nhập ngay</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <section class="verify-card">
+      <div class="verify-badge" aria-hidden="true">✓</div>
+      <h1>Xác thực tài khoản của bạn</h1>
+
+      <p class="verify-desc">
+        Chúng tôi đã gửi 1 emai xác nhận đến địa chỉ email bạn vừa đăng kí. Vui lòng kiểm tra hộp thư đến và nhấp vào liên kết xác minh để kích hoạt tài khoản
+      </p>
+
+      <p class="verify-note">
+        Nếu vẫn chưa nhận được gmail, bạn có thể yêu cầu gửi lại mã sau <span id="resendCountdown">60s</span>
+      </p>
+
+      <div id="verifyMessage" class="alert-box"></div>
+
+      <button type="button" id="resendVerifyBtn" class="btn-verify-resend" disabled>
+        Gửi lại email xác thực
+      </button>
+
+      <div class="verify-back-login">
+        <a href="login.html">Quay lại trang Đăng nhập</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

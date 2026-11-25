@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập - Quản lý chi tiêu cá nhân</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <main class="auth-main">
+    <section class="auth-card">
+      <div class="auth-card-header">
+        <h1>Đăng nhập</h1>
+        <p>Chào mừng bạn quay trở lại! Vui lòng đăng nhập</p>
+      </div>
+
+      <div id="authMessage" class="alert-box"></div>
+
+      <form id="loginForm" novalidate>
+        <div class="pill-form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="pill-form-group">
+          <label for="password">Mật khẩu</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="login-options-row">
+          <label class="round-check-label">
+            <input type="checkbox" id="rememberMe" />
+            <span class="round-checkbox-ui" aria-hidden="true"></span>
+            <span>Ghi nhớ đăng nhập</span>
+          </label>
+
+          <a href="forgot-password.html" class="forgot-link">Quên mật khẩu?</a>
+        </div>
+
+        <div class="auth-submit-wrap">
+          <button type="submit" class="btn-cyan-pill">Đăng nhập</button>
+        </div>
+      </form>
+
+      <div class="social-auth">
+        <p class="social-label">Hoặc đăng kí bằng</p>
+        <button type="button" id="googleLoginBtn" class="btn-google-circle" aria-label="Đăng nhập bằng Google">
+          G
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

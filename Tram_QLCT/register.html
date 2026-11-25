@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng ký - Quản lý chi tiêu cá nhân</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <header class="auth-topbar">
+    <div class="auth-topbar-inner">
+      <a href="index.html" class="btn-back-home">Quay lại trang chủ</a>
+      <div class="auth-top-switch">
+        Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <section class="auth-card">
+      <div class="auth-card-header">
+        <h1>Đăng ký</h1>
+        <p>Tạo tài khoản mới để quản lí tài chính của bạn</p>
+      </div>
+
+      <div id="authMessage" class="alert-box"></div>
+
+      <form id="registerForm" novalidate>
+        <div class="pill-form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="pill-form-group">
+          <label for="password">Mật khẩu</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="pill-form-group">
+          <label for="confirmPassword">Nhập lại mật khẩu</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required />
+        </div>
+
+        <div class="auth-submit-wrap">
+          <button type="submit" class="btn-cyan-pill">Đăng ký</button>
+        </div>
+      </form>
+
+      <div class="social-auth">
+        <p class="social-label">Hoặc đăng kí bằng</p>
+        <button type="button" id="googleRegisterBtn" class="btn-google-circle" aria-label="Đăng ký bằng Google">
+          G
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
