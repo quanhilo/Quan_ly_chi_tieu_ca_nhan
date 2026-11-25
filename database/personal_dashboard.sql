@@ -122,3 +122,55 @@ INSERT INTO categories (user_id, name, type, icon, color) VALUES
 (NULL, 'Hóa đơn & Tiện ích', 'Chi', 'receipt', '#118AB2'),
 (NULL, 'Lương', 'Thu', 'wallet', '#06D6A0'),
 (NULL, 'Thưởng & Phụ cấp', 'Thu', 'gift', '#8338EC');
+USE personal_finance;
+
+-- 1. Nâng cấp bảng users: hỗ trợ Google OAuth & hủy toàn bộ phiên cũ qua token_version
+ALTER TABLE users
+    MODIFY COLUMN password_hash VARCHAR(255) NULL COMMENT 'NULL nếu đăng ký qua Google OAuth',
+    ADD COLUMN google_id VARCHAR(255) NULL UNIQUE AFTER email,
+    ADD COLUMN token_version INT NOT NULL DEFAULT 1 COMMENT 'Tăng +1 khi đổi mật khẩu để vô hiệu hóa mọi token cũ' AFTER status;
+
+-- 2. Bảng lưu mã OTP / Token xác thực email & quên mật khẩu (hỗ trợ giới hạn gửi lại 60s)
+CREATE TABLE user_tokens (
+    token_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    type ENUM('VERIFY_EMAIL', 'RESET_PASSWORD') NOT NULL,
+    token_hash VARCHAR(255) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_tokens_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- 3. Bảng Thông báo người dùng (Cảnh báo ngân sách 80% / 100%)
+CREATE TABLE notifications (
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(150) NOT NULL,
+    message TEXT NOT NULL,
+    type ENUM('BUDGET_WARNING', 'BUDGET_EXCEEDED', 'SYSTEM') NOT NULL DEFAULT 'SYSTEM',
+    is_read TINYINT(1) NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_notifications_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- 4. Bảng Bài viết / Mẹo tài chính (CMS Trang chủ)
+CREATE TABLE articles (
+    article_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    summary TEXT NULL,
+    content LONGTEXT NOT NULL,
+    thumbnail_url VARCHAR(500) NULL,
+    views INT NOT NULL DEFAULT 0,
+    is_published TINYINT(1) NOT NULL DEFAULT 1,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- 5. Bảng Thông báo cập nhật hệ thống công khai (CMS Trang chủ)
+CREATE TABLE system_announcements (
+    announcement_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
