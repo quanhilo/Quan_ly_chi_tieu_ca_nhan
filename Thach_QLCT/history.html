@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lịch sử giao dịch - Quản lý chi tiêu cá nhân</title>
+  <link rel="stylesheet" href="history.css" />
+</head>
+<body class="history-body">
+  <div class="app-layout">
+    <!-- Sidebar trái -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="brand-title">Quản lý chi tiêu cá nhân</div>
+
+        <nav class="sidebar-nav" aria-label="Điều hướng chính">
+          <a href="index.html" class="nav-item">
+            <span class="nav-icon" aria-hidden="true">▣</span>
+            <span>Bảng điều khiển</span>
+          </a>
+          <a href="history.html" class="nav-item active">
+            <span class="nav-icon" aria-hidden="true">◔</span>
+            <span>Lịch sử giao dịch</span>
+          </a>
+          <a href="#" class="nav-item" data-nav="wallets">
+            <span class="nav-icon" aria-hidden="true">▭</span>
+            <span>Quản lý ví nguồn tiền</span>
+          </a>
+          <a href="#" class="nav-item" data-nav="categories">
+            <span class="nav-icon" aria-hidden="true">◫</span>
+            <span>Quản lý danh mục</span>
+          </a>
+          <a href="#" class="nav-item" data-nav="budgets">
+            <span class="nav-icon" aria-hidden="true">S</span>
+            <span>Ngân sách</span>
+          </a>
+          <a href="#" class="nav-item" data-nav="reports">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Báo cáo</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="login.html" class="nav-item logout-item" id="logoutLink">
+          <span class="nav-icon" aria-hidden="true">⇥</span>
+          <span>Đăng xuất</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Nội dung chính -->
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h1>Lịch sử giao dịch</h1>
+          <p id="greetingUser">Xin chào, Nguyễn Văn A!</p>
+        </div>
+
+        <button type="button" class="btn-primary-blue" id="openAddTxBtn">+ Thêm giao dịch</button>
+      </header>
+
+      <!-- Thanh tìm kiếm & bộ lọc -->
+      <section class="filter-bar">
+        <div class="filter-row-top">
+          <div class="search-box">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Tìm kiếm giao dịch, ghi chú........."
+              aria-label="Tìm kiếm giao dịch, ghi chú"
+            />
+          </div>
+
+          <div class="select-pill-wrap">
+            <label for="categoryFilter">Danh mục:</label>
+            <select id="categoryFilter" class="pill-select">
+              <option value="all" selected>Tất cả</option>
+              <option value="Ăn uống">Ăn uống</option>
+              <option value="Phương tiện">Phương tiện</option>
+              <option value="Xăng dầu">Xăng dầu</option>
+              <option value="Mua sắm">Mua sắm</option>
+              <option value="Cà phê">Cà phê</option>
+              <option value="Chuyển khoản">Chuyển khoản</option>
+            </select>
+          </div>
+
+          <div class="select-pill-wrap">
+            <label for="walletFilter">Ví:</label>
+            <select id="walletFilter" class="pill-select">
+              <option value="all" selected>Tất cả</option>
+              <option value="Ví VCB">Ví VCB</option>
+              <option value="Ví MoMo">Ví MoMo</option>
+              <option value="Ví Tiền Mặt">Ví Tiền Mặt</option>
+            </select>
+          </div>
+
+          <div class="advanced-wrap">
+            <button type="button" class="btn-filter-icon" id="toggleAdvancedBtn" title="Bộ lọc nâng cao">
+              ⚙
+            </button>
+            <span class="advanced-label">Bộ lọc nâng cao</span>
+          </div>
+        </div>
+
+        <div class="filter-row-sub">
+          <div class="sub-filter">
+            <label for="timeFilter">Thời gian:</label>
+            <select id="timeFilter" class="pill-select">
+              <option value="this-month" selected>Tháng này</option>
+              <option value="last-7-days">7 ngày qua</option>
+              <option value="last-month">Tháng trước</option>
+            </select>
+          </div>
+
+          <div class="sub-filter">
+            <label for="typeFilter">Loại:</label>
+            <select id="typeFilter" class="pill-select">
+              <option value="all" selected>Tất cả</option>
+              <option value="expense">Chi tiêu</option>
+              <option value="income">Thu nhập</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="advanced-panel" id="advancedPanel" hidden>
+          <div class="adv-field">
+            <label for="minAmount">Số tiền từ (đ)</label>
+            <input type="number" id="minAmount" placeholder="0" min="0" />
+          </div>
+          <div class="adv-field">
+            <label for="maxAmount">Đến (đ)</label>
+            <input type="number" id="maxAmount" placeholder="10000000" min="0" />
+          </div>
+          <button type="button" class="btn-reset-filter" id="resetFilterBtn">Xóa lọc</button>
+        </div>
+      </section>
+
+      <!-- Danh sách giao dịch theo ngày -->
+      <section class="tx-groups" id="txGroupsContainer">
+        <div class="date-group">
+          <h2 class="date-heading">Hôm nay, 12/11/2026</h2>
+          <div class="tx-row" data-category="Ăn uống" data-wallet="Ví VCB" data-type="expense" data-amount="45000">
+            <div class="tx-left">
+              <span class="row-plus">+</span>
+              <div class="cat-badge">
+                <span class="cat-icon">🍜</span>
+                <span class="cat-name">Ăn uống</span>
+              </div>
+            </div>
+            <div class="tx-time">09:15</div>
+            <div class="tx-wallet">Ví VCB</div>
+            <div class="tx-amount expense">-45.000đ</div>
+            <button type="button" class="more-btn" aria-label="Tùy chọn giao dịch">•••</button>
+          </div>
+
+          <div class="tx-row" data-category="Phương tiện" data-wallet="Ví MoMo" data-type="income" data-amount="5000000">
+            <div class="tx-left">
+              <span class="row-plus">+</span>
+              <div class="cat-badge">
+                <span class="cat-icon">🚗</span>
+                <span class="cat-name">Phương tiện</span>
+              </div>
+            </div>
+            <div class="tx-time">12:30</div>
+            <div class="tx-wallet">Ví MoMo</div>
+            <div class="tx-amount income">+5.000.000đ</div>
+            <button type="button" class="more-btn" aria-label="Tùy chọn giao dịch">•••</button>
+          </div>
+        </div>
+
+        <div class="date-group">
+          <h2 class="date-heading">Hôm qua 11/11/2026</h2>
+          <div class="tx-row" data-category="Xăng dầu" data-wallet="Ví VCB" data-type="expense" data-amount="50000">
+            <div class="tx-left">
+              <span class="row-plus">+</span>
+              <div class="cat-badge">
+                <span class="cat-icon">⛽</span>
+                <span class="cat-name">Xăng dầu</span>
+              </div>
+            </div>
+            <div class="tx-time">13:45</div>
+            <div class="tx-wallet">Ví VCB</div>
+            <div class="tx-amount expense">-50.000đ</div>
+            <button type="button" class="more-btn" aria-label="Tùy chọn giao dịch">•••</button>
+          </div>
+
+          <div class="tx-row" data-category="Mua sắm" data-wallet="Ví Tiền Mặt" data-type="expense" data-amount="420000">
+            <div class="tx-left">
+              <span class="row-plus">+</span>
+              <div class="cat-badge">
+                <span class="cat-icon">🛒</span>
+                <span class="cat-name">Mua sắm</span>
+              </div>
+            </div>
+            <div class="tx-time">18:45</div>
+            <div class="tx-wallet">Ví Tiền Mặt</div>
+            <div class="tx-amount expense">-420.000đ</div>
+            <button type="button" class="more-btn" aria-label="Tùy chọn giao dịch">•••</button>
+          </div>
+        </div>
+
+        <div class="date-group">
+          <h2 class="date-heading">10/11/2026</h2>
+          <div class="tx-row" data-category="Cà phê" data-wallet="Ví MoMo" data-type="expense" data-amount="35000">
+            <div class="tx-left">
+              <span class="row-plus">+</span>
+              <div class="cat-badge">
+                <span class="cat-icon">☕</span>
+                <span class="cat-name">Cà phê</span>
+              </div>
+            </div>
+            <div class="tx-time">10:20</div>
+            <div class="tx-wallet">Ví MoMo</div>
+            <div class="tx-amount expense">-35.000đ</div>
+            <button type="button" class="more-btn" aria-label="Tùy chọn giao dịch">•••</button>
+          </div>
+
+          <div class="tx-row" data-category="Chuyển khoản" data-wallet="Ví Tiền Mặt" data-type="income" data-amount="130000">
+            <div class="tx-left">
+              <span class="row-plus">+</span>
+              <div class="cat-badge">
+                <span class="cat-icon">⇄</span>
+                <span class="cat-name">Chuyển khoản</span>
+              </div>
+            </div>
+            <div class="tx-time">00:20</div>
+            <div class="tx-wallet">Ví Tiền Mặt</div>
+            <div class="tx-amount income">+130.000đ</div>
+            <button type="button" class="more-btn" aria-label="Tùy chọn giao dịch">•••</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="load-more-wrap">
+        <button type="button" class="btn-load-more" id="loadMoreBtn">
+          Xem thêm (7-12 trên 54 giao dịch)
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal thêm giao dịch -->
+  <div class="modal-backdrop" id="addTxModal" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Thêm giao dịch</h3>
+        <button type="button" class="modal-close" id="closeModalBtn" aria-label="Đóng">✕</button>
+      </div>
+      <form id="addTxForm">
+        <div class="modal-field">
+          <label for="newCategory">Danh mục</label>
+          <input type="text" id="newCategory" placeholder="Ví dụ: Ăn uống" required />
+        </div>
+        <div class="modal-field">
+          <label for="newWallet">Ví</label>
+          <select id="newWallet">
+            <option value="Ví VCB">Ví VCB</option>
+            <option value="Ví MoMo">Ví MoMo</option>
+            <option value="Ví Tiền Mặt">Ví Tiền Mặt</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <label for="newAmount">Số tiền (đ)</label>
+          <input type="number" id="newAmount" placeholder="50000" min="1" required />
+        </div>
+        <div class="modal-field">
+          <label for="newType">Loại</label>
+          <select id="newType">
+            <option value="expense">Chi tiêu (-)</option>
+            <option value="income">Thu nhập (+)</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary-blue">Thêm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="history.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý Danh mục cá nhân - Quản lý chi tiêu cá nhân</title>
+  <link rel="stylesheet" href="categories.css" />
+</head>
+<body class="cat-body">
+  <div class="app-layout">
+    <!-- Sidebar trái -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="brand-title">Quản lý chi tiêu<br />cá nhân</div>
+
+        <nav class="sidebar-nav" aria-label="Điều hướng chính">
+          <a href="index.html" class="nav-item">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+                <line x1="9" y1="10" x2="9" y2="20" />
+              </svg>
+            </span>
+            <span>Bảng điều khiển</span>
+          </a>
+
+          <a href="history.html" class="nav-item">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9" />
+                <polyline points="12 7 12 12 15 14" />
+              </svg>
+            </span>
+            <span>Lịch sử giao dịch</span>
+          </a>
+
+          <a href="#" class="nav-item" data-nav="wallets">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </span>
+            <span>Quản lý ví<br />nguồn tiền</span>
+          </a>
+
+          <a href="categories.html" class="nav-item active">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
+              </svg>
+            </span>
+            <span>Quản lý danh mục</span>
+          </a>
+
+          <a href="#" class="nav-item" data-nav="budgets">
+            <span class="nav-icon s-icon" aria-hidden="true">S</span>
+            <span>Ngân sách</span>
+          </a>
+
+          <a href="#" class="nav-item" data-nav="reports">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" y1="4" x2="4" y2="20" />
+                <line x1="4" y1="20" x2="20" y2="20" />
+                <line x1="9" y1="10" x2="9" y2="17" />
+                <line x1="14" y1="7" x2="14" y2="17" />
+                <line x1="19" y1="12" x2="19" y2="17" />
+              </svg>
+            </span>
+            <span>Báo cáo</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="login.html" class="nav-item logout-item" id="logoutLink">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5" />
+              <polyline points="15 16 20 12 15 8" />
+              <line x1="20" y1="12" x2="9" y2="12" />
+            </svg>
+          </span>
+          <span>Đăng xuất</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Nội dung chính -->
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h1>Quản lý Danh mục cá nhân</h1>
+          <p>Tạo và sắp xếp các danh mục thu, chi của bạn</p>
+        </div>
+
+        <button type="button" class="btn-add-cat" id="openAddCatBtn">+ Thêm danh mục mới</button>
+      </header>
+
+      <!-- Thẻ thống kê danh mục -->
+      <section class="summary-banner">
+        <div class="summary-stat first-stat">
+          <span class="summary-badge-icon" aria-hidden="true">▦</span>
+          <div>
+            <div class="stat-label">Tổng số danh mục</div>
+            <div class="stat-num" id="totalCount">09 danh mục</div>
+          </div>
+        </div>
+
+        <div class="summary-stat">
+          <div class="stat-label">Danh mục chi</div>
+          <div class="stat-num orange" id="expenseCount">08</div>
+        </div>
+
+        <div class="summary-stat">
+          <div class="stat-label">Danh mục thu</div>
+          <div class="stat-num green" id="incomeCount">01</div>
+        </div>
+
+        <div class="summary-hint">
+          Bạn có thể chỉnh sửa hoặc xóa danh mục bất kỳ lúc nào.
+        </div>
+      </section>
+
+      <!-- Thanh tìm kiếm + Tab Danh mục Chi / Danh mục Thu -->
+      <section class="toolbar-row">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input type="text" id="catSearchInput" placeholder="Tìm kiếm danh mục..." aria-label="Tìm kiếm danh mục" />
+        </div>
+
+        <div class="tab-bar" role="tablist">
+          <button type="button" class="tab-btn active" data-tab="expense">Danh mục Chi</button>
+          <button type="button" class="tab-btn" data-tab="income">Danh mục Thu</button>
+        </div>
+      </section>
+
+      <div class="group-header">
+        <h2 id="groupTitle">Danh mục chi tiêu</h2>
+        <p id="groupSub">Các nhóm chi tiêu thường dùng</p>
+      </div>
+
+      <!-- Lưới thẻ danh mục -->
+      <section class="cat-grid" id="catGrid"></section>
+    </main>
+  </div>
+
+  <!-- Modal thêm / sửa danh mục -->
+  <div class="modal-backdrop" id="catModal" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="catModalTitle">Thêm danh mục mới</h3>
+        <button type="button" class="modal-close" id="closeCatModal" aria-label="Đóng">✕</button>
+      </div>
+      <form id="catForm">
+        <input type="hidden" id="editCatId" />
+        <div class="modal-field">
+          <label for="catNameInput">Tên danh mục</label>
+          <input type="text" id="catNameInput" placeholder="Ví dụ: Ăn uống" required />
+        </div>
+        <div class="modal-field">
+          <label for="catTypeSelect">Loại danh mục</label>
+          <select id="catTypeSelect">
+            <option value="expense">Danh mục chi</option>
+            <option value="income">Danh mục thu</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <label for="catColorSelect">Màu biểu tượng</label>
+          <select id="catColorSelect">
+            <option value="#f97316">Cam</option>
+            <option value="#22c55e">Xanh lá</option>
+            <option value="#1d9bf0">Xanh dương</option>
+            <option value="#f43f5e">Đỏ hồng</option>
+            <option value="#9333ea">Tím</option>
+            <option value="#0d9488">Xanh ngọc</option>
+            <option value="#eab308">Vàng</option>
+            <option value="#ec4899">Hồng</option>
+            <option value="#9ca3af">Xám</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-add-cat">Lưu danh mục</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="categories.js"></script>
+</body>
+</html>

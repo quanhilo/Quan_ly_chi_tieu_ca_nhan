@@ -1,168 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reports - Personal Expense Management</title>
+  <title>Báo Cáo Tổng quan Thu - Chi - Quản lý chi tiêu cá nhân</title>
   <link rel="stylesheet" href="reports.css" />
 </head>
-<body>
+<body class="reports-body">
   <div class="app-layout">
-    <!-- Sidebar -->
+    <!-- Sidebar trái -->
     <aside class="sidebar">
-      <div class="brand">Personal Expense</div>
+      <div class="sidebar-top">
+        <div class="brand-title">Quản lý chi tiêu<br />cá nhân</div>
 
-      <nav class="nav-list">
-        <a href="dashboard.html" class="nav-item">
-          <span class="nav-icon">▦</span>
-          <span>Dashboard</span>
-        </a>
-        <a href="transactions.html" class="nav-item">
-          <span class="nav-icon">◷</span>
-          <span>Transactions</span>
-        </a>
-        <a href="wallets.html" class="nav-item">
-          <span class="nav-icon">💳</span>
-          <span>Wallets &amp; Sources</span>
-        </a>
-        <a href="#" class="nav-item">
-          <span class="nav-icon">📁</span>
-          <span>Categories</span>
-        </a>
-        <a href="budgets.html" class="nav-item">
-          <span class="nav-icon">$</span>
-          <span>Budgets</span>
-        </a>
-        <a href="reports.html" class="nav-item active">
-          <span class="nav-icon">📊</span>
-          <span>Reports</span>
-        </a>
-      </nav>
+        <nav class="sidebar-nav" aria-label="Điều hướng chính">
+          <a href="index.html" class="nav-item">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+                <line x1="9" y1="10" x2="9" y2="20" />
+              </svg>
+            </span>
+            <span>Bảng điều khiển</span>
+          </a>
 
-      <a href="#" class="nav-item logout-item">
-        <span class="nav-icon">↪</span>
-        <span>Logout</span>
-      </a>
+          <a href="history.html" class="nav-item">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9" />
+                <polyline points="12 7 12 12 15 14" />
+              </svg>
+            </span>
+            <span>Lịch sử giao dịch</span>
+          </a>
+
+          <a href="#" class="nav-item" data-nav="wallets">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </span>
+            <span>Quản lý ví<br />nguồn tiền</span>
+          </a>
+
+          <a href="categories.html" class="nav-item">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
+              </svg>
+            </span>
+            <span>Quản lý danh mục</span>
+          </a>
+
+          <a href="budgets.html" class="nav-item">
+            <span class="nav-icon s-icon" aria-hidden="true">S</span>
+            <span>Ngân sách</span>
+          </a>
+
+          <a href="reports.html" class="nav-item active">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" y1="4" x2="4" y2="20" />
+                <line x1="4" y1="20" x2="20" y2="20" />
+                <line x1="9" y1="10" x2="9" y2="17" />
+                <line x1="14" y1="7" x2="14" y2="17" />
+                <line x1="19" y1="12" x2="19" y2="17" />
+              </svg>
+            </span>
+            <span>Báo cáo</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="login.html" class="nav-item logout-item" id="logoutLink">
+          <span class="nav-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5" />
+              <polyline points="15 16 20 12 15 8" />
+              <line x1="20" y1="12" x2="9" y2="12" />
+            </svg>
+          </span>
+          <span>Đăng xuất</span>
+        </a>
+      </div>
     </aside>
 
-    <!-- Main Content -->
+    <!-- Nội dung chính -->
     <main class="main-content">
-      <!-- Header -->
       <header class="page-header">
-        <h1 class="page-title">Income &amp; Expense Overview Report</h1>
-        <button class="btn-export" type="button">⬇ Export Data</button>
+        <h1>Báo Cáo Tổng quan Thu - Chi</h1>
+
+        <button type="button" class="btn-export" id="exportReportBtn">
+          <span aria-hidden="true">⤓</span>
+          <span>Xuất dữ liệu</span>
+        </button>
       </header>
 
-      <!-- Period Filter Bar -->
-      <section class="filter-bar">
-        <button class="period-pill" type="button">This week</button>
-        <button class="period-pill active" type="button">This month</button>
-        <button class="period-pill" type="button">Last month</button>
-        <button class="period-pill" type="button">Next year</button>
+      <!-- Thanh bộ lọc thời gian -->
+      <section class="period-bar" aria-label="Bộ lọc thời gian">
+        <button type="button" class="period-pill" data-period="week">Tuần này</button>
+        <button type="button" class="period-pill active" data-period="month">Tháng này</button>
+        <button type="button" class="period-pill" data-period="prev-month">Tháng trước</button>
+        <button type="button" class="period-pill" data-period="next-year">Năm sau</button>
 
-        <div class="custom-range">
-          <div class="range-text">
-            <span>Custom date...</span>
-            <strong>01/11/2026 - 12/11/2026</strong>
+        <div class="custom-date-box" id="customDateBox" title="Tùy chỉnh khoảng ngày">
+          <div class="custom-date-text">
+            <span>Tùy chỉnh ngày...</span>
+            <strong id="dateRangeText">01/11/2026 - 12/11/2026</strong>
           </div>
           <span class="calendar-icon" aria-hidden="true">📅</span>
         </div>
       </section>
 
-      <!-- Summary Cards -->
-      <section class="summary-grid">
-        <article class="stat-card card-green">
-          <div class="stat-label">Total Income</div>
-          <div class="stat-value">+35.200.000 ₫</div>
+      <!-- 3 thẻ tổng hợp -->
+      <section class="kpi-grid">
+        <article class="kpi-card kpi-income">
+          <div class="kpi-label">Tổng thu</div>
+          <div class="kpi-value" id="totalIncomeVal">+35.200.000 đ</div>
         </article>
 
-        <article class="stat-card card-orange">
-          <div class="stat-label">Total Expense</div>
-          <div class="stat-value">-18.450.000 ₫</div>
+        <article class="kpi-card kpi-expense">
+          <div class="kpi-label">Tổng chi</div>
+          <div class="kpi-value" id="totalExpenseVal">-18.450.000 đ</div>
         </article>
 
-        <article class="stat-card card-blue">
-          <div class="stat-label">Reserve Balance</div>
-          <div class="stat-value">= +16.750.000 ₫</div>
-          <div class="stat-note">Good savings</div>
+        <article class="kpi-card kpi-reserve">
+          <div class="kpi-label">Số dư dự phòng</div>
+          <div class="kpi-value" id="reserveBalanceVal">= +16.750.00 đ</div>
+          <div class="kpi-sub">Tích luỹ tốt</div>
         </article>
       </section>
 
-      <!-- Comparison Chart -->
+      <!-- Biểu đồ so sánh Thu & Chi -->
       <section class="chart-card">
-        <div class="chart-top">
-          <h2 class="chart-title">Income &amp; Expense Comparison Chart</h2>
+        <div class="chart-card-head">
+          <h2>Biểu đồ so sánh Thu &amp; Chi</h2>
+
           <div class="chart-legend">
             <span class="legend-item">
-              <i class="legend-dot dot-income"></i> Total Income
+              <i class="legend-dot dot-blue"></i>
+              <span>Tổng thu</span>
             </span>
             <span class="legend-item">
-              <i class="legend-dot dot-expense"></i> Total Expense
+              <i class="legend-dot dot-red"></i>
+              <span>Tổng chi</span>
             </span>
           </div>
         </div>
 
         <div class="chart-body">
           <div class="y-axis">
-            <span>15.000.000 ₫</span>
-            <span>10.000.000 ₫</span>
-            <span>5.000.000 ₫</span>
-            <span>0 ₫</span>
+            <span>15.000.000 đ</span>
+            <span>10.000.000 đ</span>
+            <span>5.000.000 đ</span>
+            <span>0 đ</span>
           </div>
 
           <div class="plot-area">
-            <div class="grid-lines">
-              <div class="grid-row"></div>
-              <div class="grid-row"></div>
-              <div class="grid-row"></div>
-              <div class="grid-row base-row"></div>
+            <div class="grid-lines" aria-hidden="true">
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
             </div>
 
-            <div class="columns-wrap">
-              <div class="period-col">
-                <div class="col-bars">
-                  <span class="col-bar bar-in" style="height: 83%;" title="Total Income"></span>
-                  <span class="col-bar bar-ex" style="height: 55%;" title="Total Expense"></span>
-                </div>
-                <span class="x-tick">01-07/11</span>
-              </div>
-
-              <div class="period-col">
-                <div class="col-bars">
-                  <span class="col-bar bar-in" style="height: 77%;" title="Total Income"></span>
-                  <span class="col-bar bar-ex" style="height: 50%;" title="Total Expense"></span>
-                </div>
-                <span class="x-tick">08-14/11</span>
-              </div>
-
-              <div class="period-col">
-                <div class="col-bars">
-                  <span class="col-bar bar-in" style="height: 93%;" title="Total Income"></span>
-                  <span class="col-bar bar-ex" style="height: 58%;" title="Total Expense"></span>
-                </div>
-                <span class="x-tick">15-21/11</span>
-              </div>
-
-              <div class="period-col">
-                <div class="col-bars">
-                  <span class="col-bar bar-in" style="height: 82%;" title="Total Income"></span>
-                  <span class="col-bar bar-ex" style="height: 33%;" title="Total Expense"></span>
-                </div>
-                <span class="x-tick">22-28/11</span>
-              </div>
-
-              <div class="period-col">
-                <div class="col-bars">
-                  <span class="col-bar bar-in" style="height: 85%;" title="Total Income"></span>
-                  <span class="col-bar bar-ex" style="height: 48%;" title="Total Expense"></span>
-                </div>
-                <span class="x-tick">29-30/11</span>
-              </div>
-            </div>
+            <div class="bars-container" id="barsContainer"></div>
           </div>
         </div>
       </section>
     </main>
   </div>
+
+  <script src="reports.js"></script>
 </body>
 </html>
