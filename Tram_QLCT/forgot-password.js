@@ -1,30 +1,29 @@
-const forgotPasswordForm = document.getElementById("forgotPasswordForm");
-  if (forgotPasswordForm) {
-    forgotPasswordForm.addEventListener("submit", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("forgotForm");
+  const emailInput = document.getElementById("forgotEmail");
+  const feedback = document.getElementById("forgotFeedback");
+
+  function setMessage(msg, isSuccess = false) {
+    if (!feedback) return;
+    feedback.textContent = msg;
+    feedback.classList.toggle("success", isSuccess);
+  }
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const emailInput = document.getElementById("forgotEmail");
-      const email = emailInput ? emailInput.value.trim() : "";
+      const email = (emailInput?.value || "").trim();
 
-      if (!email) {
-        showMessage("forgotMessage", "Vui lòng nhập email đã đăng ký tài khoản.", "error");
+      if (!email || !email.includes("@")) {
+        setMessage("Vui lòng nhập địa chỉ Email hợp lệ.");
         return;
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        showMessage("forgotMessage", "Định dạng email chưa hợp lệ.", "error");
-        return;
-      }
+      try {
+        localStorage.setItem("tram_reset_email", email);
+      } catch (_) {}
 
-      localStorage.setItem("tram_reset_email", email);
-      showMessage(
-        "forgotMessage",
-        `Đã gửi mã OTP / liên kết khôi phục tới ${email}. Đang chuyển sang trang đặt lại mật khẩu...`,
-        "success"
-      );
-
-      setTimeout(() => {
-        window.location.href = "reset-password.html";
-      }, 900);
+      setMessage(`Đã gửi mã OTP và liên kết khôi phục tới ${email}.`, true);
     });
   }
+});

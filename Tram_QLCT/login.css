@@ -4,57 +4,106 @@
   padding: 0;
 }
 
-body.auth-page {
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+body.login-body {
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: #f4f5f6;
+  color: #111827;
+  min-height: 100vh;
+}
+
+.auth-page {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding: 0;
-  background-color: #f4f5f7;
+  padding: 20px 32px 36px;
+}
+
+/* Thanh pill phía trên */
+.top-nav-pill {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 1px solid #111827;
+  border-radius: 999px;
+  padding: 12px 38px 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.btn-back-home {
+  text-decoration: none;
+  background-color: #dbdbdb;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-back-home:hover {
+  background-color: #cccccc;
+}
+
+.switch-auth-text {
+  font-size: 13px;
+  font-weight: 700;
   color: #111827;
 }
 
-/* Khung form ở giữa màn hình */
-.auth-main {
+.switch-auth-link {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.switch-auth-link:hover {
+  text-decoration: underline;
+}
+
+/* Khung thẻ đăng nhập ở giữa */
+.login-card-wrap {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 36px 16px;
+  padding: 28px 12px 12px;
 }
 
-.auth-card {
+.login-card {
   width: 100%;
-  max-width: 390px;
+  max-width: 344px;
   background-color: #ffffff;
-  border-radius: 16px;
-  padding: 36px 28px 30px;
-  box-shadow: 0 4px 18px rgba(17, 24, 39, 0.05);
+  border-radius: 26px;
+  padding: 24px 28px 26px;
+  box-shadow: 0 2px 12px rgba(17, 24, 39, 0.03);
 }
 
-.auth-card-header {
+.login-card h1 {
   text-align: center;
-  margin-bottom: 22px;
-}
-
-.auth-card-header h1 {
-  font-size: 16px;
+  font-size: 16.5px;
   font-weight: 700;
   color: #111827;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-.auth-card-header p {
-  font-size: 13px;
+.card-subtitle {
+  text-align: center;
+  font-size: 12px;
   color: #1f2937;
+  margin-bottom: 20px;
 }
 
-/* Ô nhập liệu bo tròn */
-.pill-form-group {
-  margin-bottom: 16px;
+.form-field {
+  margin-bottom: 14px;
 }
 
-.pill-form-group label {
+.form-field label {
   display: block;
   font-size: 13px;
   font-weight: 500;
@@ -62,49 +111,45 @@ body.auth-page {
   margin-bottom: 6px;
 }
 
-.pill-form-group input {
+.form-field input {
   width: 100%;
-  height: 36px;
-  padding: 0 14px;
+  height: 40px;
   border: none;
-  border-radius: 999px;
+  border-radius: 14px;
   background-color: #d9d9d9;
+  padding: 0 14px;
   font-size: 13.5px;
   color: #111827;
+  outline: none;
 }
 
-.pill-form-group input:focus {
-  outline: 2px solid #0bc5e8;
-  background-color: #e5e7eb;
+.form-field input:focus {
+  box-shadow: 0 0 0 2px #00b8c8;
 }
 
-/* Ghi nhớ đăng nhập & Quên mật khẩu */
-.login-options-row {
+/* Hàng Ghi nhớ đăng nhập & Quên mật khẩu */
+.form-options-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-top: 14px;
-  font-size: 13px;
+  gap: 8px;
+  margin-top: 2px;
+  margin-bottom: 10px;
 }
 
-.round-check-label {
+.remember-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  font-size: 11.5px;
   color: #111827;
   cursor: pointer;
-  user-select: none;
 }
 
-.round-check-label input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.round-checkbox-ui {
+.remember-circle {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -112,103 +157,91 @@ body.auth-page {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s;
-  flex-shrink: 0;
+  transition: background-color 0.15s ease;
 }
 
-.round-check-label input[type="checkbox"]:checked + .round-checkbox-ui {
-  background-color: #0bc5e8;
+.remember-btn[aria-pressed="true"] .remember-circle {
+  background-color: #00b8c8;
 }
 
-.round-check-label input[type="checkbox"]:checked + .round-checkbox-ui::after {
+.remember-btn[aria-pressed="true"] .remember-circle::after {
   content: "✓";
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #111827;
 }
 
 .forgot-link {
+  font-size: 11.5px;
   color: #111827;
   text-decoration: none;
-  font-weight: 500;
 }
 
 .forgot-link:hover {
   text-decoration: underline;
 }
 
-/* Nút Đăng nhập */
-.auth-submit-wrap {
-  margin-top: 22px;
+.form-feedback {
+  min-height: 18px;
+  font-size: 12px;
+  color: #dc2626;
   text-align: center;
+  margin-bottom: 6px;
 }
 
-.btn-cyan-pill {
-  min-width: 135px;
-  padding: 9px 24px;
+.form-feedback.success {
+  color: #15803d;
+}
+
+.btn-submit-cyan {
+  display: block;
+  margin: 2px auto 0;
+  min-width: 112px;
+  height: 36px;
+  padding: 0 22px;
   border: none;
   border-radius: 999px;
-  background-color: #0bc5e8;
+  background-color: #00b8c8;
   color: #111827;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
 }
 
-.btn-cyan-pill:hover {
-  background-color: #06b0d1;
+.btn-submit-cyan:hover {
+  background-color: #00a2b1;
 }
 
-/* Đăng nhập bằng Google */
-.social-auth {
-  margin-top: 14px;
+.social-divider {
   text-align: center;
-}
-
-.social-label {
-  font-size: 13px;
+  font-size: 12px;
   color: #111827;
+  margin-top: 14px;
   margin-bottom: 12px;
 }
 
-.btn-google-circle {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+.btn-google-icon {
+  display: block;
+  margin: 0 auto;
   border: none;
-  background-color: #000000;
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 800;
+  background: transparent;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  line-height: 0;
 }
 
-.btn-google-circle:hover {
-  opacity: 0.85;
+.btn-google-icon:hover {
+  transform: scale(1.04);
 }
 
-/* Hộp thông báo lỗi / thành công */
-.alert-box {
-  display: none;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin-bottom: 16px;
-}
+@media (max-width: 640px) {
+  .auth-page {
+    padding: 14px 16px 24px;
+  }
 
-.alert-error {
-  display: block;
-  background-color: #fef2f2;
-  color: #b91c1c;
-  border: 1px solid #fecaca;
-}
-
-.alert-success {
-  display: block;
-  background-color: #ecfdf5;
-  color: #047857;
-  border: 1px solid #a7f3d0;
+  .top-nav-pill {
+    border-radius: 20px;
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

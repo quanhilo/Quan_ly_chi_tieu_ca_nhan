@@ -1,60 +1,70 @@
-const registerForm = document.getElementById("registerForm");
-  if (registerForm) {
-    registerForm.addEventListener("submit", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("registerForm");
+  const emailInput = document.getElementById("regEmail");
+  const passwordInput = document.getElementById("regPassword");
+  const confirmInput = document.getElementById("regConfirmPassword");
+  const feedback = document.getElementById("registerFeedback");
+  const googleBtn = document.getElementById("googleRegisterBtn");
+
+  function setMessage(msg, isSuccess = false) {
+    if (!feedback) return;
+    feedback.textContent = msg;
+    feedback.classList.toggle("success", isSuccess);
+  }
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-      clearMessage("authMessage");
+      const email = (emailInput?.value || "").trim();
+      const password = passwordInput?.value || "";
+      const confirmPassword = confirmInput?.value || "";
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-
-      if (!email || !password || !confirmPassword) {
-        showMessage("authMessage", "Vui lòng nhập đầy đủ Email và mật khẩu.");
+      if (!email || !email.includes("@")) {
+        setMessage("Vui lòng nhập địa chỉ Email hợp lệ.");
         return;
       }
 
       if (password.length < 6) {
-        showMessage("authMessage", "Mật khẩu phải có ít nhất 6 ký tự.");
+        setMessage("Mật khẩu phải có ít nhất 6 ký tự.");
         return;
       }
 
       if (password !== confirmPassword) {
-        showMessage("authMessage", "Mật khẩu nhập lại không khớp.");
+        setMessage("Mật khẩu nhập lại không khớp.");
         return;
       }
 
-      const defaultName = email.split("@")[0];
-      localStorage.setItem(
-        "tram_registered_user",
-        JSON.stringify({ fullname: defaultName, email, password, verified: false })
-      );
-
-      showMessage(
-        "authMessage",
-        "Đăng ký thành công! Đang chuyển tới trang xác thực...",
-        "success"
-      );
-
-      setTimeout(() => {
-        window.location.href = "verify.html";
-      }, 900);
-    });
-  }
-
-  const googleRegisterBtn = document.getElementById("googleRegisterBtn");
-  if (googleRegisterBtn) {
-    googleRegisterBtn.addEventListener("click", () => {
-      const googleUser = {
-        fullname: "Nguyễn Thị Trâm",
-        email: "tram.google@qlct.vn",
-        password: "",
-        verified: true
+      const fallbackName = email.split("@")[0] || "Người dùng";
+      const userRecord = {
+        email,
+        fullname: fallbackName
       };
-      localStorage.setItem("tram_registered_user", JSON.stringify(googleUser));
-      localStorage.setItem("tram_logged_in_user", JSON.stringify(googleUser));
-      showMessage("authMessage", "Đăng ký bằng Google thành công!", "success");
-      setTimeout(() => {
-        window.location.href = "profile.html";
-      }, 800);
+
+      try {
+        localStorage.setItem("tram_registered_user", JSON.stringify(userRecord));
+        localStorage.setItem("tram_logged_in_user", JSON.stringify(userRecord));
+      } catch (_) {}
+
+      setMessage("Đăng ký thành công! Đang chuyển hướng...", true);
+      window.setTimeout(() => {
+        window.location.href = "index.html";
+      }, 600);
     });
   }
+
+  if (googleBtn) {
+    googleBtn.addEventListener("click", () => {
+      const googleUser = {
+        email: "nguyenvana@gmail.com",
+        fullname: "Nguyễn Văn A"
+      };
+      try {
+        localStorage.setItem("tram_logged_in_user", JSON.stringify(googleUser));
+      } catch (_) {}
+      setMessage("Đã liên kết tài khoản Google. Đang chuyển hướng...", true);
+      window.setTimeout(() => {
+        window.location.href = "index.html";
+      }, 500);
+    });
+  }
+});

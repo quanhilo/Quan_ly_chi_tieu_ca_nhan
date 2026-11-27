@@ -3,44 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Xác thực tài khoản - Quản lý chi tiêu cá nhân</title>
+  <title>Xác thực - Quản lý chi tiêu cá nhân</title>
   <link rel="stylesheet" href="verify.css" />
 </head>
-<body class="auth-page">
-  <header class="auth-topbar">
-    <div class="auth-topbar-inner">
-      <a href="index.html" class="btn-back-home">Quay lại trang chủ</a>
-      <div class="auth-top-switch">
-        Đã xác thực tài khoản? <a href="login.html">Đăng nhập ngay</a>
-      </div>
-    </div>
-  </header>
+<body class="verify-body">
+  <div class="auth-page">
+    <!-- Thanh điều hướng phía trên -->
+    <header class="top-nav-pill">
+      <a href="home.html" class="btn-back-home">Quay lại trang chủ</a>
 
-  <main class="auth-main">
-    <section class="verify-card">
-      <div class="verify-badge" aria-hidden="true">✓</div>
-      <h1>Xác thực tài khoản của bạn</h1>
-
-      <p class="verify-desc">
-        Chúng tôi đã gửi 1 emai xác nhận đến địa chỉ email bạn vừa đăng kí. Vui lòng kiểm tra hộp thư đến và nhấp vào liên kết xác minh để kích hoạt tài khoản
+      <p class="switch-auth-text">
+        Đã xác thực tài khoản? <a href="login.html" class="switch-auth-link">Đăng nhập ngay</a>
       </p>
+    </header>
 
-      <p class="verify-note">
-        Nếu vẫn chưa nhận được gmail, bạn có thể yêu cầu gửi lại mã sau <span id="resendCountdown">60s</span>
-      </p>
+    <!-- Thẻ xác thực ở giữa -->
+    <main class="verify-card-wrap">
+      <section class="verify-card" aria-labelledby="verifyHeading">
+        <div class="badge-icon" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="#111827" stroke-width="2">
+            <path
+              d="M18 3.5l3.2 2.4 4-.5 1.3 3.8 3.6 1.8-.9 3.9 2.2 3.3-2.9 2.8.1 4-3.8 1.3-1.8 3.6-3.9-.9-3.3 2.2-2.8-2.9-4 .1-1.3-3.8-3.6-1.8.9-3.9-2.2-3.3 2.9-2.8-.1-4 3.8-1.3 1.8-3.6 3.9.9L18 3.5z"
+            />
+            <polyline points="13.5 18.5 16.5 21.5 23 15" stroke-width="2.2" />
+          </svg>
+        </div>
 
-      <div id="verifyMessage" class="alert-box"></div>
+        <h1 id="verifyHeading">Xác thực tài khoản của bạn</h1>
 
-      <button type="button" id="resendVerifyBtn" class="btn-verify-resend" disabled>
-        Gửi lại email xác thực
-      </button>
+        <p class="verify-desc">
+          Chúng tôi đã gửi 1 emai xác nhận đến địa chỉ email<br />
+          bạn vừa đăng kí. Vui lòng kiểm tra hộp thư đến và<br />
+          nhấp vào liên kết xác minh để kích hoạt tài khoản
+        </p>
 
-      <div class="verify-back-login">
-        <a href="login.html">Quay lại trang Đăng nhập</a>
-      </div>
-    </section>
-  </main>
+        <p class="verify-cooldown" id="cooldownText">
+          Nếu vẫn chưa nhận được gmail, bạn có thể yêu cầu<br />
+          gửi lại mã sau <span id="secondsLeft">60</span>s
+        </p>
 
-  <script src="app.js"></script>
+        <p class="verify-status" id="verifyStatus" role="status" aria-live="polite"></p>
+
+        <button type="button" class="btn-resend-green" id="resendBtn" disabled>
+          Gửi lại email xác thực
+        </button>
+
+        <a href="login.html" class="back-login-link">Quay lại trang Đăng nhập</a>
+      </section>
+    </main>
+  </div>
+
+  <script src="verify.js"></script>
 </body>
 </html>

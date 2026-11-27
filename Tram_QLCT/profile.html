@@ -6,46 +6,59 @@
   <title>Hồ sơ cá nhân - Quản lý chi tiêu cá nhân</title>
   <link rel="stylesheet" href="profile.css" />
 </head>
-<body class="profile-page">
-  <header class="profile-topbar">
-    <div class="profile-topbar-inner">
-      <button type="button" id="logoutBtn" class="btn-top-gray">Đăng xuất</button>
-      <a href="index.html" class="btn-top-gray">Quay lại trang chủ</a>
-    </div>
-  </header>
+<body class="profile-body">
+  <div class="auth-page">
+    <!-- Thanh điều hướng phía trên -->
+    <header class="top-nav-pill">
+      <a href="login.html" class="btn-top-gray" id="logoutTopBtn">Đăng xuất</a>
+      <a href="home.html" class="btn-top-gray">Quay lại trang chủ</a>
+    </header>
 
-  <main class="profile-main">
-    <section class="profile-card">
-      <div class="profile-header">
-        <h1>Hoàn thiện hồ sơ</h1>
-        <p>Vui lòng cung cấp thêm thông tin để thiết lập tài khoản của bạn</p>
-      </div>
+    <!-- Thẻ hoàn thiện hồ sơ ở giữa -->
+    <main class="profile-card-wrap">
+      <section class="profile-card" aria-labelledby="profileHeading">
+        <h1 id="profileHeading">Hoàn thiện hồ sơ</h1>
+        <p class="card-subtitle">
+          Vui lòng cung cấp thêm thông tin để thiết lập tài<br />
+          khoản của bạn
+        </p>
 
-      <div id="profileMessage" class="alert-box"></div>
+        <form id="profileForm" novalidate>
+          <div class="form-field">
+            <label for="fullNameInput">Họ và tên</label>
+            <input type="text" id="fullNameInput" name="fullname" autocomplete="name" required />
+          </div>
 
-      <form id="profileForm" novalidate>
-        <div class="pill-form-group">
-          <label for="profileFullname">Họ và tên</label>
-          <input type="text" id="profileFullname" name="profileFullname" required />
-        </div>
+          <div class="form-field">
+            <label for="phoneInput">Số điện thoại</label>
+            <input type="tel" id="phoneInput" name="phone" autocomplete="tel" required />
+          </div>
 
-        <div class="pill-form-group">
-          <label for="profilePhone">Số điện thoại</label>
-          <input type="tel" id="profilePhone" name="profilePhone" required />
-        </div>
+          <div class="form-field">
+            <label for="genderInput">Giới tính</label>
+            <input
+              type="text"
+              id="genderInput"
+              name="gender"
+              list="genderOptions"
+              autocomplete="sex"
+              required
+            />
+            <datalist id="genderOptions">
+              <option value="Nam"></option>
+              <option value="Nữ"></option>
+              <option value="Khác"></option>
+            </datalist>
+          </div>
 
-        <div class="pill-form-group">
-          <label for="profileGender">Giới tính</label>
-          <input type="text" id="profileGender" name="profileGender" placeholder="Nam / Nữ / Khác" required />
-        </div>
+          <p class="form-feedback" id="profileFeedback" role="alert" aria-live="polite"></p>
 
-        <div class="profile-submit-wrap">
-          <button type="submit" class="btn-cyan-pill">Hoàn tất &amp; Bắt đầu</button>
-        </div>
-      </form>
-    </section>
-  </main>
+          <button type="submit" class="btn-complete-cyan">Hoàn tất &amp; Bắt đầu</button>
+        </form>
+      </section>
+    </main>
+  </div>
 
-  <script src="tram_main.js"></script>
+  <script src="profile.js"></script>
 </body>
 </html>

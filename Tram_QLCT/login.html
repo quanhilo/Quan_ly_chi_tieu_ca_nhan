@@ -4,53 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Đăng nhập - Quản lý chi tiêu cá nhân</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
 </head>
-<body class="auth-page">
-  <main class="auth-main">
-    <section class="auth-card">
-      <div class="auth-card-header">
-        <h1>Đăng nhập</h1>
-        <p>Chào mừng bạn quay trở lại! Vui lòng đăng nhập</p>
-      </div>
+<body class="login-body">
+  <div class="auth-page">
+    <!-- Thanh điều hướng phía trên -->
+    <header class="top-nav-pill">
+      <a href="home.html" class="btn-back-home">Quay lại trang chủ</a>
 
-      <div id="authMessage" class="alert-box"></div>
+      <p class="switch-auth-text">
+        Chưa có tài khoản? <a href="register.html" class="switch-auth-link">Đăng ký ngay</a>
+      </p>
+    </header>
 
-      <form id="loginForm" novalidate>
-        <div class="pill-form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
-        </div>
+    <!-- Thẻ form đăng nhập -->
+    <main class="login-card-wrap">
+      <section class="login-card" aria-labelledby="loginHeading">
+        <h1 id="loginHeading">Đăng nhập</h1>
+        <p class="card-subtitle">Chào mừng bạn quay trở lại! Vui lòng đăng nhập</p>
 
-        <div class="pill-form-group">
-          <label for="password">Mật khẩu</label>
-          <input type="password" id="password" name="password" required />
-        </div>
+        <form id="loginForm" novalidate>
+          <div class="form-field">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" name="email" autocomplete="email" required />
+          </div>
 
-        <div class="login-options-row">
-          <label class="round-check-label">
-            <input type="checkbox" id="rememberMe" />
-            <span class="round-checkbox-ui" aria-hidden="true"></span>
-            <span>Ghi nhớ đăng nhập</span>
-          </label>
+          <div class="form-field">
+            <label for="loginPassword">Mật khẩu</label>
+            <input type="password" id="loginPassword" name="password" autocomplete="current-password" required />
+          </div>
 
-          <a href="forgot-password.html" class="forgot-link">Quên mật khẩu?</a>
-        </div>
+          <div class="form-options-row">
+            <button type="button" class="remember-btn" id="rememberBtn" aria-pressed="false">
+              <span class="remember-circle" id="rememberCircle" aria-hidden="true"></span>
+              <span>Ghi nhớ đăng nhập</span>
+            </button>
 
-        <div class="auth-submit-wrap">
-          <button type="submit" class="btn-cyan-pill">Đăng nhập</button>
-        </div>
-      </form>
+            <a href="#" class="forgot-link" id="forgotPasswordLink">Quên mật khẩu?</a>
+          </div>
 
-      <div class="social-auth">
-        <p class="social-label">Hoặc đăng kí bằng</p>
-        <button type="button" id="googleLoginBtn" class="btn-google-circle" aria-label="Đăng nhập bằng Google">
-          G
+          <p class="form-feedback" id="loginFeedback" role="alert" aria-live="polite"></p>
+
+          <button type="submit" class="btn-submit-cyan">Đăng nhập</button>
+        </form>
+
+        <div class="social-divider">Hoặc đăng kí bằng</div>
+
+        <button type="button" class="btn-google-icon" id="googleLoginBtn" aria-label="Đăng nhập bằng Google">
+          <svg width="34" height="34" viewBox="0 0 36 36" aria-hidden="true">
+            <circle cx="18" cy="18" r="17" fill="#0b0c0e" />
+            <text
+              x="18"
+              y="24.5"
+              text-anchor="middle"
+              fill="#ffffff"
+              font-family="Arial, sans-serif"
+              font-size="20"
+              font-weight="700"
+            >G</text>
+          </svg>
         </button>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
+  </div>
 
-  <script src="app.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>

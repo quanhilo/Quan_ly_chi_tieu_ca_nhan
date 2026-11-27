@@ -1,48 +1,76 @@
-const profileForm = document.getElementById("profileForm");
-  const logoutBtn = document.getElementById("logoutBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("profileForm");
+  const fullNameInput = document.getElementById("fullNameInput");
+  const phoneInput = document.getElementById("phoneInput");
+  const genderInput = document.getElementById("genderInput");
+  const feedback = document.getElementById("profileFeedback");
+  const logoutBtn = document.getElementById("logoutTopBtn");
 
-  if (profileForm) {
-    const savedProfile = JSON.parse(localStorage.getItem("tram_profile_info") || "null");
-    const loggedInUser = JSON.parse(localStorage.getItem("tram_logged_in_user") || "null");
-
-    const fullnameInput = document.getElementById("profileFullname");
-    const phoneInput = document.getElementById("profilePhone");
-    const genderInput = document.getElementById("profileGender");
-
-    if (fullnameInput) {
-      fullnameInput.value = savedProfile?.fullname || loggedInUser?.fullname || "";
-    }
-    if (phoneInput && savedProfile?.phone) {
-      phoneInput.value = savedProfile.phone;
-    }
-    if (genderInput && savedProfile?.gender) {
-      genderInput.value = savedProfile.gender;
-    }
-
-    profileForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const fullname = fullnameInput ? fullnameInput.value.trim() : "";
-      const phone = phoneInput ? phoneInput.value.trim() : "";
-      const gender = genderInput ? genderInput.value.trim() : "";
-
-      if (!fullname || !phone || !gender) {
-        showMessage("profileMessage", "Vui lòng nhập đầy đủ Họ và tên, Số điện thoại và Giới tính.", "error");
-        return;
-      }
-
-      const profileData = { fullname, phone, gender };
-      localStorage.setItem("tram_profile_info", JSON.stringify(profileData));
-      showMessage("profileMessage", "Lưu hồ sơ thành công! Đang chuyển về trang chủ...", "success");
-
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 900);
-    });
+  function setMessage(msg, isSuccess = false) {
+    if (!feedback) return;
+    feedback.textContent = msg;
+    feedback.classList.toggle("success", isSuccess);
   }
+
+  try {
+    const existing =
+      JSON.parse(localStorage.getItem("tram_user_profile") || "null") ||
+      JSON.parse(localStorage.getItem("tram_logged_in_user") || "null");
+
+    if (existing) {
+      if (fullNameInput && existing.fullname) fullNameInput.value = existing.fullname;
+      if (phoneInput && existing.phone) phoneInput.value = existing.phone;
+      if (genderInput && existing.gender) genderInput.value = existing.gender;
+    }
+  } catch (_) {}
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("tram_logged_in_user");
-      window.location.href = "login.html";
+      try {
+        localStorage.removeItem("tram_logged_in_user");
+      } catch (_) {}
     });
   }
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fullname = (fullNameInput?.value || "").trim();
+      const phone = (phoneInput?.value || "").trim();
+      const gender = (genderInput?.value || "").trim();
+
+      if (!fullname) {
+        setMessage("Vui lòng nhập Họ và tên.");
+        return;
+      }
+
+      const digitsOnly = phone.replace(/\D/g, "");
+      if (digitsOnly.length < 9 || digitsOnly.length > 12) {
+        setMessage("Vui lòng nhập Số điện thoại hợp lệ.");
+        return;
+      }
+
+      if (!gender) {
+        setMessage("Vui lòng nhập hoặc chọn Giới tính.");
+        return;
+      }
+
+      try {
+        const currentLogged = JSON.parse(localStorage.getItem("tram_logged_in_user") || "{}");
+        const updatedProfile = {
+          ...currentLogged,
+          fullname,
+          phone,
+          gender
+        };
+        localStorage.setItem("tram_user_profile", JSON.stringify(updatedProfile));
+        localStorage.setItem("tram_logged_in_user", JSON.stringify(updatedProfile));
+      } catch (_) {}
+
+      setMessage("Lưu hồ sơ thành công! Đang chuyển hướng...", true);
+      window.setTimeout(() => {
+        window.location.href = "index.html";
+      }, 600);
+    });
+  }
+});
